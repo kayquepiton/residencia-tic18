@@ -1,0 +1,4 @@
+
+- **Coesão:** A função `maxmin` possui alta coesão, pois realiza uma única tarefa bem definida, que é encontrar o máximo e o mínimo em um vetor de inteiros.
+
+- **Acoplamento:** A função `maxmin` possui baixo acoplamento, pois é independente de outras partes do código e não depende de funções ou módulos externos para realizar sua tarefa.

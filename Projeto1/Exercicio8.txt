@@ -1,0 +1,20 @@
+Extensões instaladas: Python Extension Pack, Extension Pack for Java.
+
+Python Extension Pack
+
+Claro, uma versão resumida e mais pessoal:
+
+O "Python Extension Pack" é como um kit de ferramentas poderoso 
+para o Visual Studio Code quando estamos programando em Python. 
+Com ele, podemos escrever código Python mais facilmente, depurar 
+problemas, receber sugestões úteis, formatar nosso código 
+direitinho e até trabalhar com Django e Jupyter Notebook sem complicação. 
+
+Extension Pack for Java
+
+O "Extension Pack for Java" é como um kit de ferramentas incríveis 
+para facilitar a vida de quem programa em Java no Visual Studio Code.
+Com ele, tudo fica mais fácil, desde escrever código até depurar 
+e gerenciar projetos. Além disso, ele traz sugestões úteis, como
+suporte para Spring e ferramentas para Docker e Kubernetes. 
+
