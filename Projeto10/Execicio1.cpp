@@ -20,7 +20,9 @@ int main() {
         if (cin >> N && N > 0) {
             break;
         } else {
-            cout << "Número inválido, por favor digite um número válido!\n" << endl;
+            cout << "Número inválido, por favor digite um número positivo válido!\n" << endl;
+            
+            // Limpa o estado de erro do cin e descarta caracteres extras
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
@@ -44,6 +46,8 @@ int main() {
                 break;
             } else {
                 cout << "\nNota 1 inválida, por favor digite um valor numérico válido." << endl;
+                
+                // Limpa o estado de erro do cin e descarta caracteres extras
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
@@ -56,6 +60,8 @@ int main() {
                 break;
             } else {
                 cout << "\nNota 2 inválida, por favor digite um valor numérico válido." << endl;
+                
+                // Limpa o estado de erro do cin e descarta caracteres extras
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }

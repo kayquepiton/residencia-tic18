@@ -129,7 +129,7 @@ int main() {
 
         N--; // Reduza o limite de alunos restantes
 
-        if(N > 1){
+        if(N > 0){
             cout << "\nDeseja incluir mais alunos (s/n)? ";
             string resposta;
             cin >> resposta;

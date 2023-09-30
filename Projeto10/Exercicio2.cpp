@@ -26,7 +26,6 @@ void bubbleSort(vector<Aluno>& alunos) {
     } while (swapped);
 }
 
-
 int main() {
     int N;
 
@@ -36,7 +35,9 @@ int main() {
         if (cin >> N && N > 0) {
             break;
         } else {
-            cout << "Número inválido, por favor digite um número válido!\n" << endl;
+            cout << "Número inválido, por favor digite um número positivo válido!\n" << endl;
+            
+            // Limpa o estado de erro do cin e descarta caracteres extras
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
@@ -60,6 +61,8 @@ int main() {
                 break;
             } else {
                 cout << "\nNota 1 inválida, por favor digite um valor numérico válido." << endl;
+                
+                // Limpa o estado de erro do cin e descarta caracteres extras
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
@@ -72,6 +75,8 @@ int main() {
                 break;
             } else {
                 cout << "\nNota 2 inválida, por favor digite um valor numérico válido." << endl;
+                
+                // Limpa o estado de erro do cin e descarta caracteres extras
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
@@ -82,7 +87,7 @@ int main() {
 
     bubbleSort(alunos);
 
-    cout << "\nInformações dos alunos: " << endl;
+    cout << "\nInformações dos alunos (ordenados por nome):" << endl;
     for (int i = 0; i < N; i++) {
         cout << "Aluno " << i + 1 << ": " << alunos[i].nome << ", Nota 1: " << alunos[i].nota1 << ", Nota 2: " << alunos[i].nota2 << endl;
     }
