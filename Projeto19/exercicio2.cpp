@@ -4,57 +4,138 @@
 
 using namespace std;
 
-class ItemSet {
+// Classe que representa um conjunto de itens.
+class ConjuntoItens {
 private:
-    vector<string> items;
+    vector<string> itens; // Vetor para armazenar os itens do conjunto.
 
 public:
-    // Método para inserir um item no conjunto, caso não exista
-    void inserir(string s) {
-        // Verifica se o item já existe no conjunto
-        if (find(items.begin(), items.end(), s) == items.end()) {
-            items.push_back(s);
-            cout << "Item \"" << s << "\" inserido no conjunto." << endl;
-        } else {
-            cout << "Item \"" << s << "\" já existe no conjunto." << endl;
+    // Construtor padrão
+    ConjuntoItens() {}
+
+    // Construtor de cópia
+    ConjuntoItens(const ConjuntoItens& outro) : itens(outro.itens) {}
+
+    // Método para inserir um item no conjunto, verificando se ele já não existe.
+    void inserir(const string& s) {
+        if (find(itens.begin(), itens.end(), s) == itens.end()) {
+            itens.push_back(s);
         }
     }
 
-    // Método para excluir um item do conjunto, caso exista
-    void excluir(string s) {
-        // Procura o item no conjunto
-        auto it = find(items.begin(), items.end(), s);
-        if (it != items.end()) {
-            items.erase(it);
-            cout << "Item \"" << s << "\" excluído do conjunto." << endl;
-        } else {
-            cout << "Item \"" << s << "\" não encontrado no conjunto." << endl;
+    // Método para excluir um item do conjunto.
+    void excluir(const string& s) {
+        auto it = find(itens.begin(), itens.end(), s);
+        if (it != itens.end()) {
+            itens.erase(it);
         }
     }
 
-    // Método para exibir o conjunto de itens
-    void exibir() {
-        cout << "Itens no conjunto:" << endl;
-        for (const string& item : items) {
-            cout << "- " << item << endl;
+    // Sobrecarga do operador de atribuição.
+    ConjuntoItens& operator=(const ConjuntoItens& outro) {
+        if (this != &outro) {
+            itens = outro.itens;
         }
+        return *this;
+    }
+
+    // Sobrecarga do operador + para representar a união de conjuntos.
+    ConjuntoItens operator+(const ConjuntoItens& outro) const {
+        ConjuntoItens resultado = *this;
+        for (const auto& item : outro.itens) {
+            resultado.inserir(item);
+        }
+        return resultado;
+    }
+
+    // Sobrecarga do operador * para representar a intersecção de conjuntos.
+    ConjuntoItens operator*(const ConjuntoItens& outro) const {
+        ConjuntoItens resultado;
+        for (const auto& item : itens) {
+            if (find(outro.itens.begin(), outro.itens.end(), item) != outro.itens.end()) {
+                resultado.inserir(item);
+            }
+        }
+        return resultado;
+    }
+
+    // Sobrecarga do operador - para representar a diferença entre conjuntos.
+    ConjuntoItens operator-(const ConjuntoItens& outro) const {
+        ConjuntoItens resultado = *this;
+        for (const auto& item : outro.itens) {
+            resultado.excluir(item);
+        }
+        return resultado;
+    }
+
+    // Sobrecarga do operador ^ para representar a diferença simétrica.
+    ConjuntoItens operator^(const ConjuntoItens& outro) const {
+        ConjuntoItens conjuntoUniao = *this + outro;
+        ConjuntoItens conjuntoIntersecao = *this * outro;
+        return conjuntoUniao - conjuntoIntersecao;
+    }
+
+    // Sobrecarga do operador == para verificar se dois conjuntos são iguais.
+    bool operator==(const ConjuntoItens& outro) const {
+        if (itens.size() != outro.itens.size()) {
+            return false;
+        }
+        for (const auto& item : itens) {
+            if (find(outro.itens.begin(), outro.itens.end(), item) == outro.itens.end()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Método para imprimir o conjunto.
+    void imprimir() const {
+        for (const auto& item : itens) {
+            cout << item << " ";
+        }
+        cout << endl;
     }
 };
 
 int main() {
-    ItemSet conjunto;
+    ConjuntoItens A, B, C;
 
-    conjunto.inserir("Maçã");
-    conjunto.inserir("Banana");
-    conjunto.inserir("Maçã");
-    conjunto.inserir("Pêra");
+    // Inserindo itens nos conjuntos A, B e C.
+    A.inserir("maca");
+    A.inserir("banana");
+    B.inserir("banana");
+    B.inserir("cereja");
+    C.inserir("maca");
+    C.inserir("cereja");
 
-    conjunto.exibir();
+    // Imprimindo os conjuntos A, B e C.
+    cout << "Conjunto A: ";
+    A.imprimir();
+    cout << "Conjunto B: ";
+    B.imprimir();
+    cout << "Conjunto C: ";
+    C.imprimir();
 
-    conjunto.excluir("Banana");
-    conjunto.excluir("Uva");
+    // Realizando operações de união, interseção, diferença e diferença simétrica.
+    ConjuntoItens D = A + B;
+    cout << "Conjunto D (A uniao B): ";
+    D.imprimir();
 
-    conjunto.exibir();
+    D = A * C;
+    cout << "Conjunto D (A interseccao C): ";
+    D.imprimir();
+
+    D = B - C;
+    cout << "Conjunto D (B - C): ";
+    D.imprimir();
+
+    D = A ^ C;
+    cout << "Conjunto D (Diferenca simetrica A e C): ";
+    D.imprimir();
+
+    // Verificando se os conjuntos A e B são iguais.
+    bool saoIguais = A == B;
+    cout << "A e igual a B: " << saoIguais << endl;
 
     return 0;
 }
